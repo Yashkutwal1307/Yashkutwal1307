@@ -2,7 +2,7 @@ name: Generate Pacman Contribution Graph
 
 on:
   schedule:
-    - cron: "0 */12 * * *" # Runs every 12 hours
+    - cron: "0 */12 * * *" # every 12 hours
   workflow_dispatch:
 
 jobs:
@@ -18,11 +18,13 @@ jobs:
       with:
         node-version: "18"
 
-    - name: Install pacman-canvas
-      run: npm install -g pacman-canvas
+    - name: Install github-contribution-canvas
+      run: npm install -g github-contribution-canvas
 
-    - name: Generate graph
-      run: pacman-canvas --username yashkutwal1307 --output ./output/
+    - name: Generate Pacman graph
+      run: |
+        mkdir -p output
+        github-contribution-canvas yashkutwal1307 --output ./output/pacman-contribution-graph.svg
 
     - name: Commit output
       run: |
